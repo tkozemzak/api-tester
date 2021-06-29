@@ -13,16 +13,16 @@
 
 <body>
     <div class="p-4">
-        <form>
+        <form data-form>
             <div class="input-group mb-4">
-                <select class="form-select flex-grow-0 w-auto">
+                <select class="form-select flex-grow-0 w-auto" data-method>
                     <option value="GET" selected>GET</option>
                     <option value="POST">POST</option>
                     <option value="PUT">PUT</option>
                     <option value="PATCH">PATCH</option>
                     <option value="DELETE">DELETE</option>
                 </select>
-                <input required class="form-control" type="url" placeholder="https://example.com" />
+                <input required class="form-control" type="url" placeholder="https://jsonplaceholder.typicode.com/posts/1" data-url value="https://jsonplaceholder.typicode.com/posts/1"/>
                 <button type="submit" class="btn btn-primary">Send</button>
             </div>
 
