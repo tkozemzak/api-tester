@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+       <div class="p-4">
+            <form>
+                <div class="input-group mb-4">
+                    <select class="form-select flex-grow-0 w-auto">
+                        <option value="GET" selected>GET</option>
+                        <option value="POST" >POST</option>
+                        <option value="PUT" >PUT</option>
+                        <option value="PATCH" >PATCH</option>
+                        <option value="DELETE" >DELETE</option>
+                    </select>
+                    <input required class="form-control" type="url" placeholder="https://example.com"/>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="query-params-tab" data-bs-toggle="tab" data-bs-target="#query-params" type="button" aria-selected="true">Query Params</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="request-headers-tab" data-bs-toggle="tab" data-bs-target="#request-headers" type="button" aria-selected="false">Request Headers</button>
+                    </li>
+                </ul>
+            </form>
+       </div>
+        
+        <script src="script.js" type="module"></script>
+    </body>
+</html>
