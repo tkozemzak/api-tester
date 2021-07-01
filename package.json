@@ -22,7 +22,8 @@
     "@popperjs/core": "^2.9.2",
     "@types/popper.js": "^1.11.0",
     "axios": "^0.21.1",
-    "bootstrap": "^5.0.2"
+    "bootstrap": "^5.0.2",
+    "pretty-bytes": "^5.6.0"
   },
   "devDependencies": {
     "snowpack": "^3.6.2"
