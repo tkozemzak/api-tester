@@ -2,6 +2,7 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 import prettyBytes from 'pretty-bytes'
+import setupEditors from './setupEditor'
 
 const form = document.querySelector('[data-form]')
 
@@ -28,6 +29,8 @@ axios.interceptors.response.use(updateEndTime, e => {
     return Promise.reject(updateEndTime(e.response))
 })
 
+const { requestEditor, updateResponseEditor } = setupEditors()
+
 function updateEndTime(response) {
     response.customData = response.customData || {}
     response.customData.time = new Date().getTime() - response.config.customData.startTime
@@ -37,16 +40,24 @@ function updateEndTime(response) {
 form.addEventListener('submit', (e) => {
     e.preventDefault()
 
+    let data;
+    try {
+        data = JSON.parse(requestEditor.state.doc.toString() || null)
+    } catch (e) {
+        alert('JSON data is malformed')
+        return
+    }
+
     axios({
         url: document.querySelector('[data-url]').value,
         method: document.querySelector('[data-method]').value,
         params: keyValuePairsToObjects(queryParamsContainer),
-        headers: keyValuePairsToObjects(requestHeadersContainer)
+        headers: keyValuePairsToObjects(requestHeadersContainer),
+        data,
     }).catch(e => e).then(response => {
         console.log('response', response)
         document.querySelector('[data-response-section]').classList.remove('d-none')
-        updateResponseBody(response.data)
-        // updateResponseEditor(response.data)
+        updateResponseEditor(response.data)
         updateResponseHeaders(response.headers)
         updateResponseDetails(response)
     })
@@ -66,18 +77,7 @@ function updateResponseHeaders(headers) {
     })
 }
 
-function updateResponseBody(body) {
-    responseBodyContainer.innerHTML = ''
-    console.log('body', body)
-    Object.entries(body).forEach(([key, value]) => {
-        const keyElement = document.createElement('div')
-        keyElement.textContent = key
-        responseBodyContainer.append(keyElement)
-        const valueElement = document.createElement('div')
-        valueElement.textContent = value
-        responseBodyContainer.append(valueElement)
-    })
-}
+
 
 function updateResponseDetails(response) {
     responseStatusContainer.textContent = response.status
