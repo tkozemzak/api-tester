@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "snowpack dev",
-    "deploy": "aws s3 sync build/ s3://api-test-app",
+    "deploy": "gh-pages -d .",
     "build": "webpack"
   },
   "repository": {
